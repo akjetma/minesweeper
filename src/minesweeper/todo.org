@@ -1,0 +1,5 @@
+* move existing code over
+* test existing code
+* finish game logic
+* build REPL interface
+* build web interface
