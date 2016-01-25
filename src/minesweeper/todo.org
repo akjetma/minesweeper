@@ -1,5 +1,14 @@
-* move existing code over
-* test existing code
-* finish game logic
-* build REPL interface
-* build web interface
+* Tasks
+** DONE move existing code over
+** DONE test existing code
+** TODO finish game logic [0/2]
+*** TODO redo reveal algorithm to only reveal to the nearest squares with numbers
+**** - game state should be mines and numbers of neighboring mines only, not clear/uncleared
+**** - will need secondary stateful object to keep track of either move sequence or revealed squares
+**** - move sequence is more pure/doesn't destroy information.
+**** - so the reveal state is no longer tracked in the 'game state' board, but derived from move seq every time.
+*** TODO neighbor detection not working correctly
+** TODO build REPL interface [0/1]
+*** TODO validation and/or feedback
+** TODO build web interface
+

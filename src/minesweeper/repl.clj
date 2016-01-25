@@ -3,6 +3,8 @@
             [clojure.pprint :refer [pprint]]
             [clojure.string :as string]))
 
+(declare play)
+
 (defn pad
   [n]
   (format 
@@ -12,7 +14,7 @@
 (defn display-cell
   [cell]
   (case cell
-    (:? :u) "[ ]"
+    (:? :u) "__]"
     (0 :c)  "   "
     :m      " @ "
     :e      " X "
@@ -44,32 +46,32 @@
      (range)
      board))))
 
-(defn prompt
-  [question]
-  (println question)
-  (flush)
-  (read-line))
+(defonce ^:private *board*
+  (atom nil))
 
-(defn end
-  [reality message]
-  (println (display reality))
-  (println message)
-  (when (= (prompt "Try again? (y/n)") "y")
-    (game)))
+(defn show-
+  [board message]
+  (println (display board))
+  (println message))
 
-(defn continue
+(defn show
   [reality]
-  (println (display (game/knowledge reality)))
-  (let [input (prompt "Next move [row column] (without the brackets): ")
-        position (map #(Integer. %) (string/split input #" "))
-        new-reality (game/move reality position)
-        cells (flatten new-reality)]
-    (cond
-      (some #{:e} cells) (end new-reality "You lose :(")
-      (every? #{:m :c} cells) (end new-reality "You win :)")
-      :else (continue new-reality))))
+  (case (game/state reality)
+    :lose (show- reality "You lose :(")
+    :win (show- reality "You win :)")
+    :continue (show- (game/knowledge reality) "Your move...")))
 
-(defn game
+(defn check
   []
-  (continue
-   (game/new-reality 10 10 30)))
+  (show @*board*))
+
+(defn play!
+  [rows cols mines]
+  (reset! *board* (game/new-reality rows cols mines))
+  (check))
+
+(defn move!
+  [row col]
+  (swap! *board* game/move [row col])
+  (check))
+

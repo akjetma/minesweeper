@@ -112,6 +112,14 @@
    (range)
    reality))
 
+(defn state
+  [reality]
+  (let [cells (flatten reality)]
+    (cond
+      (some #{:e} cells) :lose
+      (every? #{:m :c} cells) :win
+      :else :continue)))
+
 (defn move
   [board position]
   (case (get-in board position)
