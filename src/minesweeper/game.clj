@@ -65,7 +65,7 @@
        (conj discovered position)
        (->> (adjacents position)
             (shuffle)
-            (take 3)
+            (take 2)
             (remove discovered)))))))
 
 
