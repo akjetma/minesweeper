@@ -1,14 +1,50 @@
 # minesweeper
 
-A Clojure library designed to ... well, that part is up to you.
+Experimenting with making multiple front-ends for a simple game with a common backend. Plan is to make web interface, CLI interface, REPL interface, and possibly native.
 
-## Usage
+```
+user=> (minesweeper.repl/play! 10 10 30)
+    0  1  2  3  4  5  6  7  8  9 
+ 0 __|__|__|__|__|__|__|__|__|__|
+ 1 __|__|__|__|__|__|__|__|__|__|
+ 2 __|__|__|__|__|__|__|__|__|__|
+ 3 __|__|__|__|__|__|__|__|__|__|
+ 4 __|__|__|__|__|__|__|__|__|__|
+ 5 __|__|__|__|__|__|__|__|__|__|
+ 6 __|__|__|__|__|__|__|__|__|__|
+ 7 __|__|__|__|__|__|__|__|__|__|
+ 8 __|__|__|__|__|__|__|__|__|__|
+ 9 __|__|__|__|__|__|__|__|__|__|
 
-FIXME
+Your move...
+nil
+user=> (minesweeper.repl/move! 5 5)
+    0  1  2  3  4  5  6  7  8  9 
+ 0 __|__|__|__|__|__|__|__|__|__|
+ 1 __|__|__|__|__|__|__|__|__|__|
+ 2 __|__|__|__|__|__|__|__|__|__|
+ 3 __|__|__|__|__|__|__|__|__|__|
+ 4  2  2  2  2 __| 4 __|__|__|__|
+ 5           1  1  3 __|__| 4  2 
+ 6  1  1  1        1  4 __| 4  1 
+ 7 __|__| 2  1  1     2 __| 3 __|
+ 8 __| 4  5 __| 3  2  3  2  2  1 
+ 9 __|__|__|__| 3 __|__|__|      
 
-## License
+Your move...
+nil
+user=> (minesweeper.repl/move! 0 3)
+    0  1  2  3  4  5  6  7  8  9 
+ 0 __|__|__|__|__|__|__| @  @ __|
+ 1 __|__|__|__| @  @ __|__| @ __|
+ 2 __| @ __|__|__|__|__|__| @  @ 
+ 3  X  @ __| @ __| @ __|__| @ __|
+ 4              @     @ __| @  @ 
+ 5                    @  @       
+ 6                       @       
+ 7 __| @                 @     @ 
+ 8 __|       @                   
+ 9  @  @  @  @     @  @ __|      
 
-Copyright © 2016 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+You lose :(
+```
