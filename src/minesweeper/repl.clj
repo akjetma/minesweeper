@@ -14,7 +14,7 @@
 (defn display-cell
   [cell]
   (case cell
-    (:? :u) "__]"
+    (:? :u) "__|"
     (0 :c)  "   "
     :m      " @ "
     :e      " X "
@@ -71,7 +71,7 @@
   (check))
 
 (defn move!
-  [row col]
+  [col row]
   (swap! *board* game/move [row col])
   (check))
 
